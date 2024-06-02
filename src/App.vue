@@ -32,7 +32,7 @@ export default {
 
 <style>
 body {
-            background-image: url("./nokia.png");
+            background-image: url("../public/nokia.png");
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
