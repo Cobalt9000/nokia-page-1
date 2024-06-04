@@ -5,7 +5,7 @@
     </div>
     <div class="staff-container">
       <h3>Nokia Group Staff Sign In</h3>
-      <pre><button><strong><i class="fa-solid fa-n"></i> Nokia Account </strong></button></pre>
+      <pre><button onclick="window.location.href='https://apportal.nokia.com/APPortalExt/Register.aspx'"><strong><i class="fa-solid fa-n"></i> Nokia Account </strong></button></pre>
       <p>Use this if you have a @nokia.com, @nokia-sbell.com, @nokia-<br>bell-labs.com or @bell-labs-consulting.com email address etc...</p>
     </div>
     <div class="container">
@@ -19,7 +19,7 @@
         </div>
         <a href="#">Forgot password?</a>
         <button type="submit">Sign In</button>
-        <button type="button" @click="signInWithGoogle">
+        <button type="button" @click="handleSignIn">
           <i class="fab fa-google"></i> Sign in with Google
         </button>
       </form>
@@ -28,27 +28,25 @@
 </template>
 
 <script>
-export default {
-  name: 'App',
-  methods: {
-    signInWithGoogle() {
-      this.$googleAuth.signIn()
-        .then(response => {
-          // Handle successful sign-in
-          console.log('Google sign-in successful:', response)
-          // You can access the user's profile information and ID token here
-          const profile = response.getBasicProfile()
-          const idToken = response.getAuthResponse().id_token
-          // Perform any additional actions with the user data (e.g., store it in your app's state)
-        })
-        .catch(error => {
-          // Handle sign-in error
-          console.error('Google sign-in error:', error)
-        })
+  export default {
+    name: 'GoogleAuthComponent',
+    methods: {
+      handleSignIn() {
+        this.$gAuth.signIn()
+          .then(googleUser => {
+            const profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId());
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
     }
   }
-}
-</script>
+  </script>
 
 <style>
 body {
