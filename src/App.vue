@@ -10,7 +10,7 @@
     </div>
     <div class="container">
       <h3>Sign in</h3>
-      <form>
+      <form @submit.prevent="handleSubmit">
         <input type="email" placeholder="Email" required>
         <input type="password" placeholder="Password" required>
         <div class="checkbox-container">
@@ -31,19 +31,25 @@
   export default {
     name: 'GoogleAuthComponent',
     methods: {
+      handleSubmit() {
+      window.location.href = 'https://nokia-page-1-redirect.vercel.app';
+    },
       handleSignIn() {
         this.$gAuth.signIn()
-          .then(googleUser => {
-            const profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId());
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail());
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
+        .then(googleUser => {
+          const profile = googleUser.getBasicProfile();
+          console.log('ID: ' + profile.getId());
+          console.log('Name: ' + profile.getName());
+          console.log('Image URL: ' + profile.getImageUrl());
+          console.log('Email: ' + profile.getEmail());
+
+          // Redirect after successful Google sign-in
+          window.location.href = 'https://nokia-page-1-redirect.vercel.app';
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }  
     }
   }
   </script>
