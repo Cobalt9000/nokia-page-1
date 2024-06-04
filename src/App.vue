@@ -18,7 +18,7 @@
           <label for="rememberMe">Remember me</label>
         </div>
         <a href="#">Forgot password?</a>
-        <button type="submit">Sign In</button>
+        <button type="submit">Login</button>
         <button type="button" @click="handleSignIn">
           <i class="fab fa-google"></i> Sign in with Google
         </button>
